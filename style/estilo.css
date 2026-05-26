@@ -1,0 +1,77 @@
+@import url('https://googleapis.com');
+
+body {
+    background-color: lightgrey;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+.nota {
+    display: flex;
+    align-items: top;
+    width: 200px;
+    height: 200px;
+    background-color: lightgoldenrodyellow;
+    margin: 10px;
+    position: fixed;
+    top: 10%;
+    left: 80%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+.nota p {
+    margin: 10px;
+    font-size: 20px;
+    font-family: 'Caveat', cursive;
+}
+
+.buton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: lightgrey;
+    margin: 10px;
+    position: fixed;
+    top: 80%;
+    left: 80%;
+    border-style: groove;
+    border-width: 2px;
+    border-color: gray;
+}
+
+.monitor {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    width: 600px;           
+    height: 600px;          
+    background-color: black;
+    position: fixed;        
+    top: 10%;               
+    left: 10%;              
+    transform: translate(-10%, -10%);  
+    margin: 0;  
+    border-style: ridge;            
+}
+.monitor h1 {
+    color: green;
+    margin: 0;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    background-color: lightgrey;
+    margin: 10px;
+    position: fixed;
+    top: 80%;
+    left: 5%;
+}
+.logo h1 {
+    color: grey;
+    margin: 0;
+}
