@@ -74,13 +74,59 @@
                     setTimeout(() => {
                         loginVisivel = true;
                         monitor.innerHTML = '';
-                        monitor.innerHTML += '<br><h2>LOGIN</h2>';
-                        monitor.innerHTML += '<form onsubmit="fazerLogin(event)" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">';
-                        monitor.innerHTML += '<input type="text" id="username" placeholder="User" style="padding: 8px; background-color: #222; color: #0f0; border: 1px solid #0f0;" required>';
-                        monitor.innerHTML += '<input type="password" id="password" placeholder="Senha" style="padding: 8px; background-color: #222; color: #0f0; border: 1px solid #0f0;" required>';
-                        monitor.innerHTML += '<button type="submit" style="padding: 8px; background-color: #0f0; color: #000; border: none; cursor: pointer; font-weight: bold;">ENTRAR</button>';
-                        monitor.innerHTML += '<p id="erro-login" style="color: red; margin: 10px 0 0 0;"></p>';
-                        monitor.innerHTML += '</form>';
+
+                        const titulo = document.createElement('h2');
+                        titulo.textContent = 'LOGIN';
+                        monitor.appendChild(titulo);
+
+                        const form = document.createElement('form');
+                        form.style.display = 'flex';
+                        form.style.flexDirection = 'column';
+                        form.style.gap = '10px';
+                        form.style.marginTop = '20px';
+
+                        const inputUser = document.createElement('input');
+                        inputUser.type = 'text';
+                        inputUser.id = 'username';
+                        inputUser.placeholder = 'User';
+                        inputUser.required = true;
+                        inputUser.style.padding = '8px';
+                        inputUser.style.backgroundColor = '#222';
+                        inputUser.style.color = '#0f0';
+                        inputUser.style.border = '1px solid #0f0';
+
+                        const inputPassword = document.createElement('input');
+                        inputPassword.type = 'password';
+                        inputPassword.id = 'password';
+                        inputPassword.placeholder = 'Senha';
+                        inputPassword.required = true;
+                        inputPassword.style.padding = '8px';
+                        inputPassword.style.backgroundColor = '#222';
+                        inputPassword.style.color = '#0f0';
+                        inputPassword.style.border = '1px solid #0f0';
+
+                        const botao = document.createElement('button');
+                        botao.type = 'submit';
+                        botao.textContent = 'ENTRAR';
+                        botao.style.padding = '8px';
+                        botao.style.backgroundColor = '#0f0';
+                        botao.style.color = '#000';
+                        botao.style.border = 'none';
+                        botao.style.cursor = 'pointer';
+                        botao.style.fontWeight = 'bold';
+
+                        const erro = document.createElement('p');
+                        erro.id = 'erro-login';
+                        erro.style.color = 'red';
+                        erro.style.margin = '10px 0 0 0';
+
+                        form.appendChild(inputUser);
+                        form.appendChild(inputPassword);
+                        form.appendChild(botao);
+                        form.appendChild(erro);
+                        form.addEventListener('submit', fazerLogin);
+
+                        monitor.appendChild(form);
                     }, mensagens.length * 800 + 1000);
 
                 } else {
@@ -106,7 +152,9 @@
                 
                 if (usuarioValido) {
                     erroLogin.textContent = '';
-                    alert('Login bem-sucedido!');
+                    const monitor = document.getElementById('monitor');
+                    monitor.innerHTML = '<h1>Login bem-sucedido!</h1>' +
+                        '<img src="imgs/Mapa-A.png" alt="Mapa-A" class="mapa-a">';
                 } else {
                     erroLogin.textContent = 'User ou senha incorretos!';
                 }
