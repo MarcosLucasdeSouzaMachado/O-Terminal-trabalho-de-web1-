@@ -16,22 +16,25 @@
         <div class="led"></div>
         
         <div class="buton" onclick="LigarLED()">
-            <p>on</p>
+            <p>on/off</p>
         </div>
         
         <div class="monitor" id="monitor">
-            <h1>
-                >_Hello Juliet_<br>
-                >_Bem Vindo ao terminal_
-            </h1>
+            
         </div>
         
         <div class="logo">
             <h1>Negativo =( </h1>
         </div>
 
+        <div class="audio1"></div>
+        <div class="audio2"></div>
+        <div class="audio3"></div>
+
+
         <script>
             let ledLigado = false;
+            let loginVisivel = false;
 
             function LigarLED() {
                 const led = document.querySelector('.led');
@@ -41,10 +44,68 @@
                 
                 if (ledLigado) {
                     led.classList.add('ligado');
-                    monitor.innerHTML = '<h1>>_inicializing..._</h1>';
+                    monitor.innerHTML = '';
+                    loginVisivel = false;
+                    
+                    const mensagens = [
+                        '>_inicializing.',
+                        '>_inicializing.._',
+                        '>_inicializing..._',
+                        '>_1%_',
+                        '>_10%_',
+                        '>_25%_',
+                        '>_50%_',
+                        '>_67%_',
+                        '>_75%_',
+                        '>_inicialization complete!_',
+                        '>_Hello Juliet_',
+                        '>_Bem Vindo ao terminal_'
+                    ];
+                    
+                    mensagens.forEach((msg, index) => {
+                        setTimeout(() => {
+                            monitor.innerHTML += '<h1>' + msg + '</h1><br>';
+                        }, index * 800); 
+                    });
+                    
+                    setTimeout(() => {
+                        loginVisivel = true;
+                        monitor.innerHTML = '';
+                        monitor.innerHTML += '<br><h2>LOGIN</h2>';
+                        monitor.innerHTML += '<form onsubmit="fazerLogin(event)" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">';
+                        monitor.innerHTML += '<input type="text" id="username" placeholder="User" style="padding: 8px; background-color: #222; color: #0f0; border: 1px solid #0f0;" required>';
+                        monitor.innerHTML += '<input type="password" id="password" placeholder="Senha" style="padding: 8px; background-color: #222; color: #0f0; border: 1px solid #0f0;" required>';
+                        monitor.innerHTML += '<button type="submit" style="padding: 8px; background-color: #0f0; color: #000; border: none; cursor: pointer; font-weight: bold;">ENTRAR</button>';
+                        monitor.innerHTML += '<p id="erro-login" style="color: red; margin: 10px 0 0 0;"></p>';
+                        monitor.innerHTML += '</form>';
+                    }, mensagens.length * 800 + 1000);
+
                 } else {
                     led.classList.remove('ligado');
-                    monitor.innerHTML = '<h1>>_Hello Juliet_<br>>_Bem Viado ao terminal_</h1>';
+                    monitor.innerHTML = '';
+                    loginVisivel = false;
+                }
+            }
+            
+            function fazerLogin(event) {
+                event.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const erroLogin = document.getElementById('erro-login');
+                
+                const usuariosValidos = [
+                    { user: 'ADMIN', senha: 'ADMIN' },
+                    { user: 'gu4rd4-01', senha: '11-06-1969' }
+                ];
+                
+                const usuarioValido = usuariosValidos.some(u => u.user === username && u.senha === password);
+                
+                if (usuarioValido) {
+                    erroLogin.textContent = '';
+                    alert('Login bem-sucedido!');
+                } else {
+                    erroLogin.textContent = 'User ou senha incorretos!';
                 }
             }
         </script>
