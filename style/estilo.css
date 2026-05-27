@@ -6,6 +6,7 @@ body {
     padding: 0;
     height: 100vh;
 }
+
 .nota {
     display: flex;
     align-items: top;
@@ -18,10 +19,28 @@ body {
     left: 80%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
 }
+
 .nota p {
     margin: 10px;
     font-size: 20px;
     font-family: 'Caveat', cursive;
+}
+
+.led {
+    width: 30px;
+    height: 30px;
+    background-color: #001a00;
+    border-radius: 50%;
+    position: fixed;
+    top: 77%;
+    left: 82%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.led.ligado {
+    background-color: #00ff00;
+    box-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
 }
 
 .buton {
@@ -38,25 +57,34 @@ body {
     border-style: groove;
     border-width: 2px;
     border-color: gray;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.buton:active {
+    transform: scale(0.95);
 }
 
 .monitor {
     display: flex;
     justify-content: left;
     align-items: left;
-    width: 600px;           
-    height: 600px;          
+    width: 600px;
+    height: 600px;
     background-color: black;
-    position: fixed;        
-    top: 10%;               
-    left: 10%;              
-    transform: translate(-10%, -10%);  
-    margin: 0;  
-    border-style: ridge;            
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    transform: translate(-10%, -10%);
+    margin: 0;
+    border-style: ridge;
+    transition: all 0.3s ease;
 }
+
 .monitor h1 {
     color: green;
     margin: 0;
+    font-size: 24px;
 }
 
 .logo {
@@ -71,6 +99,7 @@ body {
     top: 80%;
     left: 5%;
 }
+
 .logo h1 {
     color: grey;
     margin: 0;
