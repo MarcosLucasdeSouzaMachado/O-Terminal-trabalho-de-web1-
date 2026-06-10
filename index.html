@@ -33,7 +33,7 @@
         <div class="audio1"></div>
         <div class="audio2"></div>
         <div class="audio3"></div>
-
+        <!-- link do video cctv: https://pixabay.com/videos/hallway-dark-corridor-dim-mystery-20837/  -->
 
         <script>
             let ledLigado = false;
@@ -136,29 +136,113 @@
                 }
             }
             
-            function fazerLogin(event) {
-                event.preventDefault();
-                
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const erroLogin = document.getElementById('erro-login');
-                
-                const usuariosValidos = [
-                    { user: 'ADMIN', senha: 'ADMIN' },
-                    { user: 'gu4rd4-01', senha: '11-06-1969' }
-                ];
-                
-                const usuarioValido = usuariosValidos.some(u => u.user === username && u.senha === password);
-                
-                if (usuarioValido) {
-                    erroLogin.textContent = '';
-                    const monitor = document.getElementById('monitor');
-                    monitor.innerHTML = '<h1>Login bem-sucedido!</h1>' +
-                        '<img src="imgs/Mapa-A.png" alt="Mapa-A" class="mapa-a">';
-                } else {
-                    erroLogin.textContent = 'User ou senha incorretos!';
-                }
+           function fazerLogin(event) {
+    event.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const erroLogin = document.getElementById('erro-login');
+    
+    const usuariosValidos = [
+        { user: 'ADMIN', senha: 'ADMIN' },
+        { user: 'gu4rd4-01', senha: '11-06-1969' }
+    ];
+    
+    const usuarioValido = usuariosValidos.some(u => u.user === username && u.senha === password);
+    
+    if (usuarioValido) {
+        erroLogin.textContent = '';
+        const monitor = document.getElementById('monitor');
+        
+        // 1. Define a mensagem inicial de sucesso
+        monitor.innerHTML = '<h1 id="status-mapa">>_Login bem-sucedido!_</h1>';
+
+        // 2. Cria o container do mapa (essencial para o ponto do laboratório funcionar)
+        const mapaContainer = document.createElement('div');
+        mapaContainer.className = 'mapa-container';
+
+        // Cria o elemento de imagem para o mapa
+        const imgMapa = document.createElement('img');
+        imgMapa.src = 'imgs/Mapa-A.png';
+        imgMapa.alt = 'Mapa';
+        imgMapa.className = 'mapa-monitor';
+        mapaContainer.appendChild(imgMapa);
+
+        // 3. Cria o ponto de clique invisível do Laboratório
+        const pontoLaboratorio = document.createElement('div');
+        pontoLaboratorio.className = 'ponto-laboratorio';
+        pontoLaboratorio.title = 'Acessar Câmeras do Laboratório';
+        pontoLaboratorio.style.display = 'none'; 
+        mapaContainer.appendChild(pontoLaboratorio);
+
+        monitor.appendChild(mapaContainer);
+
+        // 4. Cria o elemento do Pop-up de Vídeo (CCTV) - CAMINHO CORRIGIDO AQUI
+        const popupCCTV = document.createElement('div');
+        popupCCTV.className = 'popup-cctv';
+        popupCCTV.innerHTML = `
+            <div class="popup-header">
+                <span>>_FEED_CCTV: LAB_01</span>
+                <button class="btn-fechar-popup">X</button>
+            </div>
+            <video src="imgs/CCtv.mp4" autoplay loop muted></video>
+        `;
+        monitor.appendChild(popupCCTV);
+
+        // 5. Cria o botão para alternar os mapas
+        const btnTrocar = document.createElement('button');
+        btnTrocar.textContent = 'Alternar Mapa';
+        btnTrocar.className = 'btn-trocar-mapa';
+        monitor.appendChild(btnTrocar);
+
+        let mapaAtual = 'A';
+
+        // Temporizador para o texto superior
+        setTimeout(() => {
+            const statusTexto = document.getElementById('status-mapa');
+            if (statusTexto) {
+                statusTexto.textContent = `>_Mapa-${mapaAtual}`;
             }
-        </script>
+        }, 2000);
+
+        // Lógica do clique para alternar os mapas
+        btnTrocar.addEventListener('click', () => {
+            const statusTexto = document.getElementById('status-mapa');
+            
+            if (mapaAtual === 'A') {
+                imgMapa.src = 'imgs/Mapa-B.png';
+                mapaAtual = 'B';
+                pontoLaboratorio.style.display = 'block'; // Mostra o ponto clicável no Mapa-B
+            } else {
+                imgMapa.src = 'imgs/Mapa-A.png';
+                mapaAtual = 'A';
+                pontoLaboratorio.style.display = 'none';  // Esconde o ponto no Mapa-A
+                popupCCTV.classList.remove('visivel');    // Fecha o vídeo se mudar de mapa
+            }
+
+            if (statusTexto && statusTexto.textContent !== '>_Login bem-sucedido!_') {
+                statusTexto.textContent = `>_Mapa-${mapaAtual}`;
+            }
+        });
+
+        // Evento para abrir o Pop-up ao clicar na bolinha do Laboratório
+        pontoLaboratorio.addEventListener('click', () => {
+            popupCCTV.classList.add('visivel');
+            const video = popupCCTV.querySelector('video');
+            if (video) video.play();
+        });
+
+        // Evento para fechar o Pop-up no botão "X"
+        popupCCTV.querySelector('.btn-fechar-popup').addEventListener('click', () => {
+            popupCCTV.classList.remove('visivel');
+            const video = popupCCTV.querySelector('video');
+            if (video) video.pause(); // Pausa o vídeo enquanto fechado
+        });
+
+    } else {
+        erroLogin.textContent = 'User ou senha incorretos!';
+    }
+}
+</script>
     </body>
 </html>

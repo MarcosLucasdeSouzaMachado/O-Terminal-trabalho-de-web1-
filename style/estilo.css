@@ -104,6 +104,134 @@ body {
     display: block;
     margin-top: 20px;
 }
+/* Nova classe para formatar a imagem do mapa e não quebrar o layout */
+.mapa-monitor {
+    max-width: 100%;
+    max-height: 70%; /* Abriu espaço para o botão na parte inferior */
+    object-fit: contain;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Estilização do Botão Quadrado Arredondado Preto e Verde */
+.btn-trocar-mapa {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 20px;
+    background-color: #000000; /* Fundo Preto */
+    color: #00ff00;            /* Texto Verde */
+    border: 2px solid #00ff00; /* Borda Verde */
+    border-radius: 8px;        /* Quadrado Arredondado */
+    font-family: monospace;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+/* Efeito de Hover (passar o mouse) */
+.btn-trocar-mapa:hover {
+    background-color: #001a00; /* Verde bem escuro */
+    box-shadow: 0 0 15px #00ff10; /* Brilho verde */
+}
+
+/* Efeito de Clique */
+.btn-trocar-mapa:active {
+    transform: scale(0.95);
+}
+/* Container que envelopa o mapa para as coordenadas funcionarem */
+.mapa-container {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Redefinição da imagem para alinhar corretamente com o container */
+.mapa-monitor {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* Ponto invisível perfeitamente posicionado sobre a bolinha do Laboratório */
+.ponto-laboratorio {
+    position: absolute;
+    /* Ajustes baseados na proporção da imagem do seu Mapa-B */
+    top: 26%; 
+    left: 37.1%;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(0, 255, 0, 0); /* Totalmente transparente */
+    transition: background-color 0.2s ease;
+}
+
+/* Pequeno feedback visual ao passar o mouse na bolinha */
+.ponto-laboratorio:hover {
+    background-color: rgba(0, 255, 0, 0.2); /* Pisca um verde leve */
+}
+
+/* Janela do Pop-up Falso (CCTV) */
+.popup-cctv {
+    display: none; /* Começa oculto */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: #000000;
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+    z-index: 10;
+    padding: 5px;
+}
+
+/* Quando ganha a classe 'visivel' via JS, ele aparece */
+.popup-cctv.visivel {
+    display: block;
+}
+
+/* Barra superior da janela de CCTV */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #001a00;
+    padding: 5px 10px;
+    color: #00ff00;
+    font-family: monospace;
+    font-size: 14px;
+    border-bottom: 2px solid #00ff00;
+    margin-bottom: 5px;
+}
+
+/* Botão X de fechar */
+.btn-fechar-popup {
+    background: none;
+    border: none;
+    color: #00ff00;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.btn-fechar-popup:hover {
+    color: #00ff00; /* Fica vermelho no hover */
+}
+
+/* Estilo do vídeo dentro do pop-up */
+.popup-cctv video {
+    width: 100%;
+    display: block;
+    border: 1px solid #004400;
+}
 
 .audio1 {
     display: flex;
