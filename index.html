@@ -157,6 +157,7 @@
 
                     monitor.innerHTML = '<h1 id="status-mapa">>_Login bem-sucedido!_</h1>';
                     
+                    
                     // 1. Cria o container do mapa 
                     const mapaContainer = document.createElement('div');
                     mapaContainer.className = 'mapa-container';
@@ -168,14 +169,21 @@
                     imgMapa.className = 'mapa-monitor';
                     mapaContainer.appendChild(imgMapa);
 
-                    // 2. Cria o ponto de clique da garagem
+                    // 2. Cria o ponto de clique do Laboratório / CCTV
+                    const pontoLaboratorio = document.createElement('div');
+                    pontoLaboratorio.className = 'ponto-laboratorio';
+                    pontoLaboratorio.title = 'Acessar vídeo do CCTV (Laboratório)';
+                    pontoLaboratorio.style.display = 'block';
+                    mapaContainer.appendChild(pontoLaboratorio);
+
+                    // 2b. Cria o ponto de clique da garagem
                     const pontoTransportes = document.createElement('div');
                     pontoTransportes.className = 'ponto-transportes';
                     pontoTransportes.title = 'Acessar vídeo de Transportes';
                     pontoTransportes.style.display = 'block';
                     mapaContainer.appendChild(pontoTransportes);
 
-                    // 2b. Cria o ponto de clique do Aquário
+                    // 2c. Cria o ponto de clique do Aquário
                     const pontoAquario = document.createElement('div');
                     pontoAquario.className = 'ponto-aquario';
                     pontoAquario.title = 'Acessar vídeo do Aquário';
@@ -236,10 +244,25 @@
                         }
                     }, 2000);
 
+                    function fecharTodosPopups() {
+                        popupCCTV.classList.remove('visivel');
+                        popupTransportes.classList.remove('visivel');
+                        popupAquario.classList.remove('visivel');
+
+                        const videos = [
+                            popupCCTV.querySelector('video'),
+                            popupTransportes.querySelector('video'),
+                            popupAquario.querySelector('video')
+                        ];
+                        videos.forEach(video => {
+                            if (video) video.pause();
+                        });
+                    }
+
                     // Clique >aqui< para alternar os mapas
                     btnTrocar.addEventListener('click', () => {
                         const statusTexto = document.getElementById('status-mapa');
-                        
+
                         if (mapaAtual === 'B') {
                             imgMapa.src = 'imgs/Mapa-A.png';
                             mapaAtual = 'A';
@@ -252,12 +275,10 @@
                             pontoLaboratorio.style.display = 'none';
                             pontoTransportes.style.display = 'none';
                             pontoAquario.style.display = 'none';
-                            popupCCTV.classList.remove('visivel');
-                            popupTransportes.classList.remove('visivel');
-                            popupAquario.classList.remove('visivel');
+                            fecharTodosPopups();
                         }
 
-                        if (statusTexto && statusTexto.textContent !== '>_Login bem-sucedido!_') {
+                        if (statusTexto) {
                             statusTexto.textContent = `>_Mapa-${mapaAtual}`;
                         }
                     });
