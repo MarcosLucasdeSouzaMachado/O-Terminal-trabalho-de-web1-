@@ -96,7 +96,6 @@ body {
     margin: 0;
     font-size: 24px;
 }
-
 .monitor img.mapa-a {
     max-width: 100%;
     max-height: 100%;
@@ -104,43 +103,37 @@ body {
     display: block;
     margin-top: 20px;
 }
-/* Nova classe para formatar a imagem do mapa e não quebrar o layout */
 .mapa-monitor {
     max-width: 100%;
-    max-height: 70%; /* Abriu espaço para o botão na parte inferior */
+    max-height: 70%; 
     object-fit: contain;
     display: block;
     margin-top: 20px;
 }
 
-/* Estilização do Botão Quadrado Arredondado Preto e Verde */
 .btn-trocar-mapa {
     position: absolute;
     bottom: 20px;
     right: 20px;
     padding: 12px 20px;
-    background-color: #000000; /* Fundo Preto */
-    color: #00ff00;            /* Texto Verde */
-    border: 2px solid #00ff00; /* Borda Verde */
-    border-radius: 8px;        /* Quadrado Arredondado */
+    background-color: #000000; 
+    color: #00ff00;            
+    border: 2px solid #00ff00; 
+    border-radius: 8px;        
     font-family: monospace;
     font-weight: bold;
     cursor: pointer;
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
     transition: all 0.2s ease;
 }
-
-/* Efeito de Hover (passar o mouse) */
 .btn-trocar-mapa:hover {
-    background-color: #001a00; /* Verde bem escuro */
-    box-shadow: 0 0 15px #00ff10; /* Brilho verde */
+    background-color: #001a00; 
+    box-shadow: 0 0 15px #00ff10; 
 }
-
-/* Efeito de Clique */
 .btn-trocar-mapa:active {
     transform: scale(0.95);
 }
-/* Container que envelopa o mapa para as coordenadas funcionarem */
+
 .mapa-container {
     position: relative;
     width: 100%;
@@ -149,8 +142,6 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-/* Redefinição da imagem para alinhar corretamente com o container */
 .mapa-monitor {
     max-width: 100%;
     max-height: 100%;
@@ -158,28 +149,33 @@ body {
     display: block;
 }
 
-/* Ponto invisível perfeitamente posicionado sobre a bolinha do Laboratório */
-.ponto-laboratorio {
+.ponto-laboratorio, .ponto-transportes, .ponto-aquario {
     position: absolute;
-    /* Ajustes baseados na proporção da imagem do seu Mapa-B */
-    top: 26%; 
-    left: 37.1%;
     width: 25px;
     height: 25px;
     border-radius: 50%;
     cursor: pointer;
-    background-color: rgba(0, 255, 0, 0); /* Totalmente transparente */
+    background-color: rgba(0, 255, 0, 0.322);
     transition: background-color 0.2s ease;
 }
-
-/* Pequeno feedback visual ao passar o mouse na bolinha */
-.ponto-laboratorio:hover {
-    background-color: rgba(0, 255, 0, 0.2); /* Pisca um verde leve */
+.ponto-laboratorio {
+    top: 15%;
+    left: 41.5%;
+}
+.ponto-transportes {
+    top: 85%;
+    left: 60%;
+}
+.ponto-aquario {
+    top: 80%;
+    left: 40%;
+}
+.ponto-aquario:hover {
+    background-color: rgba(0, 255, 0, 0.2);
 }
 
-/* Janela do Pop-up Falso (CCTV) */
 .popup-cctv {
-    display: none; /* Começa oculto */
+    display: none; 
     position: absolute;
     top: 50%;
     left: 50%;
@@ -191,13 +187,9 @@ body {
     z-index: 10;
     padding: 5px;
 }
-
-/* Quando ganha a classe 'visivel' via JS, ele aparece */
 .popup-cctv.visivel {
     display: block;
 }
-
-/* Barra superior da janela de CCTV */
 .popup-header {
     display: flex;
     justify-content: space-between;
@@ -211,7 +203,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* Botão X de fechar */
 .btn-fechar-popup {
     background: none;
     border: none;
@@ -221,12 +212,10 @@ body {
     font-family: monospace;
     font-size: 16px;
 }
-
 .btn-fechar-popup:hover {
-    color: #00ff00; /* Fica vermelho no hover */
+    color: #00ff00; 
 }
 
-/* Estilo do vídeo dentro do pop-up */
 .popup-cctv video {
     width: 100%;
     display: block;
